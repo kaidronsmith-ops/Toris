@@ -1,16 +1,34 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>REALMS Universal Intelligence Prompt</title>
-    <meta property="og:image" content="https://bolt.new/static/og_default.png" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content="https://bolt.new/static/og_default.png" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+
+class Intent {
+public:
+    Intent(const std::string& name, const std::vector<std::string>& keywords, const std::string& response)
+        : name(name), keywords(keywords), response(response) {}
+
+    bool matches(const std::string& input) const {
+        std::string lowerInput = input;
+        std::transform(lowerInput.begin(), lowerInput.end(), lowerInput.begin(), ::tolower);
+        for (const auto& keyword : keywords) {
+            if (lowerInput.find(keyword) != std::string::npos) return true;
+        }
+        return false;
+    }
+
+    std::string getResponse() const { return response; }
+
+private:
+    std::string name;
+    std::vector<std::string> keywords;
+    std::string response;
+};
+
+class Chatbot {
+public:
+    void addIntent(const Intent& intent) { intents.push_back(intent); }
+
+    std::string getResponse(const std::string& input) {
+        for (const auto& intent :
+        
